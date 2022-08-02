@@ -1,5 +1,4 @@
 import HomeImg from "../Images/homeImg.jpg";
-import LogoImg from "../components/Navbar/svgs/LogoIcon";
 
 const Homepage = () => {
   return (
