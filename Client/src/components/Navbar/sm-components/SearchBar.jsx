@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import searchInputContext from "../../../context/searchInputContext";
 
 const SearchBar = () => {
+  const { searchInput, setSearchInput } = useContext(searchInputContext);
   const [search, setSearch] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [hidden, setHidden] = useState(
-    "text-gray-900 absolute top-24 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer  "
+    "text-gray-900 absolute top-12 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer  "
   );
+  const [companyName, setCompanyName] = useState("hidden");
 
   //Fetch companies
   useEffect(() => {
@@ -45,8 +49,10 @@ const SearchBar = () => {
 
   const handleSelect = () => {
     setSearch(data.ticker);
-    setHidden(
-      "text-gray-900 absolute top-24  h-auto p-2 rounded-lg bg-gray-100 cursor-pointer hidden"
+    setSearchInput(data.ticker);
+    setHidden("hidden");
+    setCompanyName(
+      "bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0"
     );
   };
 
@@ -54,14 +60,15 @@ const SearchBar = () => {
     <div className="flex justify-center items-center w-5/12 relative ">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search By Company Symbol"
         className="bg-gray-100 p-2 w-full outline-none rounded-lg "
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
           setHidden(
-            "text-gray-900 absolute top-24 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer "
+            "text-gray-900 absolute top-12 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer "
           );
+          setCompanyName("hidden");
         }}
       />
       {data && search.length !== 0 && Object.keys(data).length !== 0 && (
@@ -82,9 +89,7 @@ const SearchBar = () => {
         </div>
       )}
       {data && search.length !== 0 && Object.keys(data).length !== 0 && (
-        <div className="bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0">
-          {data.name}
-        </div>
+        <div className={companyName}>{data.name}</div>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 
 const Profile = () => {
   const { data, error, loading } = useFetch(
-    "https://finnhub.io/api/v1/stock/profile2?symbol=AAPL&token=cbkcu8aad3if45781mfg"
+    "https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=1&from=1631022248&to=1631627048&token=cbkcu8aad3if45781mfg"
   );
   console.log(data);
   return (
