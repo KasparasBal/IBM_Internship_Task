@@ -1,16 +1,91 @@
-import SearchIcon from "../svgs/SearchIcon";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const SearchBar = () => {
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [hidden, setHidden] = useState(
+    "text-gray-900 absolute top-24 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer  "
+  );
+
+  //Fetch companies
+  useEffect(() => {
+    //Search by user input if char.length is not more than 35 and not less than 0.
+    if (search.length < 35 && search.length !== 0) {
+      fetch(
+        `https://finnhub.io/api/v1/stock/profile2?symbol=${search}&token=cbkcu8aad3if45781mfg`
+      )
+        .then((res) => {
+          //Validation for reaching the API Limit
+          if (!res.ok) {
+            throw Error("Too Many Requests!");
+          }
+          setError("Too many requests!");
+          return res.json();
+        })
+        .then((data) => {
+          setData(data);
+          if (Object.keys(data).length === 0) {
+            //Validation for incorrect company symbol input
+            setError("No such companies exist !");
+          }
+          if (Object.keys(data).length !== 0) {
+            setError(null);
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(err.message);
+        });
+    }
+  }, [search]);
+
+  const handleSelect = () => {
+    setSearch(data.ticker);
+    setHidden(
+      "text-gray-900 absolute top-24  h-auto p-2 rounded-lg bg-gray-100 cursor-pointer hidden"
+    );
+  };
+
   return (
-    <div className="flex justify-center items-center w-5/12  ">
+    <div className="flex justify-center items-center w-5/12 relative ">
       <input
         type="text"
         placeholder="Search"
-        className="bg-gray-100 p-2 w-full outline-none rounded-l-lg"
+        className="bg-gray-100 p-2 w-full outline-none rounded-lg "
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setHidden(
+            "text-gray-900 absolute top-24 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer "
+          );
+        }}
       />
-      <div className="text-gray-900  p-2 cursor-pointer bg-gray-100 rounded-r-lg ">
-        <SearchIcon />
-      </div>
+      {data && search.length !== 0 && Object.keys(data).length !== 0 && (
+        <div onClick={handleSelect} className={hidden}>
+          <div className="flex items-center justify-between">
+            <div className="bg-blue-500 text-slate-200 text-xl p-2 rounded-lg justify-center items-center  ">
+              {data.name}
+            </div>
+            <div className="text-lg p-2 ">{data.country}</div>
+            <div className="text-lg p-2">{data.currency}</div>
+            <div className="text-lg p-2">{data.weburl}</div>
+          </div>
+        </div>
+      )}
+      {error && search.length !== 0 && (
+        <div className=" bg-slate-100 border border-red-700 text-red-700 absolute -top-9 left-0 p-1 w-5/5 rounded-md text-d">
+          {error}
+        </div>
+      )}
+      {data && search.length !== 0 && Object.keys(data).length !== 0 && (
+        <div className="bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0">
+          {data.name}
+        </div>
+      )}
     </div>
   );
 };
