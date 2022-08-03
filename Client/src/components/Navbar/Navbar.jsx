@@ -1,8 +1,5 @@
-//Context
-import { useContext } from "react";
-import searchInputContext from "../../context/searchInputContext";
-import dateFromContext from "../../context/dateFromContext";
-import dateToContext from "../../context/dateToContext";
+//Navigation
+import { useNavigate } from "react-router-dom";
 // Sm-Components
 import SearchBar from "./sm-components/SearchBar";
 import DatePicker from "./sm-components/DatePicker";
@@ -11,14 +8,10 @@ import SearchIcon from "./svgs/SearchIcon";
 import LogoIcon from "./svgs/LogoIcon";
 
 const Navbar = () => {
-  const { searchInput, setSearchInput } = useContext(searchInputContext);
-  const { dateFrom, setDateFrom } = useContext(dateFromContext);
-  const { dateTo, setDateTo } = useContext(dateToContext);
+  let navigate = useNavigate();
 
-  const searchHandler = () => {
-    console.log(searchInput);
-    console.log(dateTo);
-    console.log(dateFrom);
+  const SearchHandler = () => {
+    navigate("/profile");
   };
 
   return (
@@ -29,7 +22,7 @@ const Navbar = () => {
       <SearchBar />
       <DatePicker />
       <div
-        onClick={searchHandler}
+        onClick={SearchHandler}
         className="text-gray-900  p-2 cursor-pointer  bg-gray-100 rounded-lg "
       >
         <SearchIcon />
