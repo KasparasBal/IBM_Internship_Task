@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import searchInputContext from "../../../context/searchInputContext";
+import inputErrorContext from "../../../context/InputErrorContext";
 
 const SearchBar = () => {
-  const { searchInput, setSearchInput } = useContext(searchInputContext);
+  const { setSearchInput } = useContext(searchInputContext);
+  const { setInputError } = useContext(inputErrorContext);
   const [search, setSearch] = useState("");
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [hidden, setHidden] = useState(
     "text-gray-900 absolute top-12 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer  "
   );
@@ -24,7 +25,7 @@ const SearchBar = () => {
         .then((res) => {
           //Validation for reaching the API Limit
           if (!res.ok) {
-            throw Error("Too Many Requests!");
+            throw Error("Too Many Requests! Please wait a couple of seconds");
           }
           setError("Too many requests!");
           return res.json();
@@ -38,22 +39,32 @@ const SearchBar = () => {
           if (Object.keys(data).length !== 0) {
             setError(null);
           }
-          setLoading(false);
         })
         .catch((err) => {
-          setLoading(false);
           setError(err.message);
         });
     }
   }, [search]);
 
   const handleSelect = () => {
+    //Set Previous Search Results
+    localStorage.setItem("symbol", data.ticker);
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("country", data.country);
+    localStorage.setItem("currency", data.currency);
+    localStorage.setItem("weburl", data.weburl);
     setSearchInput(data.ticker);
     setHidden("hidden");
     setCompanyName(
       "bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0 "
     );
   };
+
+  if (search.length === 0) {
+    setInputError("1");
+  } else {
+    setInputError("");
+  }
 
   return (
     <div className="flex justify-center items-center w-5/12 relative  ">

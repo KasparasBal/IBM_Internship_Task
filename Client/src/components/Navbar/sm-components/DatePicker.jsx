@@ -4,8 +4,8 @@ import dateFromContext from "../../../context/dateFromContext";
 import dateToContext from "../../../context/dateToContext";
 
 const DatePicker = () => {
-  const { dateFrom, setDateFrom } = useContext(dateFromContext);
-  const { dateTo, setDateTo } = useContext(dateToContext);
+  const { setDateFrom } = useContext(dateFromContext);
+  const { setDateTo } = useContext(dateToContext);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Navbar2 from "../components/Navbar/Navbar2";
 
 import useFetch from "../hooks/useFetch";
@@ -17,10 +17,6 @@ const Profile = () => {
   const { From } = useContext(FromContext);
   const { To } = useContext(ToContext);
 
-  console.log(To);
-  console.log(From);
-  console.log(searchInput);
-
   // Fetching the Chart Data
 
   const { data } = useFetch(
@@ -30,8 +26,6 @@ const Profile = () => {
   const { data: data2 } = useFetch(
     `https://finnhub.io/api/v1/stock/profile2?symbol=${searchInput}&token=cbkcu8aad3if45781mfg`
   );
-  console.log(data2);
-  console.log(searchInput);
 
   let array = [];
   if (data !== null) {
@@ -46,7 +40,7 @@ const Profile = () => {
       });
     }
   }
-  console.log(array);
+
   // //////////////////////////////////////////////////////////////////Test
   const divRef = useRef();
 
@@ -97,15 +91,18 @@ const Profile = () => {
               <h2 className="px-2 text-lg">Country:</h2>
               <h2>{data2.country}</h2>
             </div>
-            <a
-              href={data2.weburl}
-              target="_blank"
-              className="flex items-center justify-center py-2"
-            >
-              <button className="px-2 text-lg bg-sky-600 rounded-md p-2 w-8/12">
-                Visit
-              </button>
-            </a>
+            {data2.weburl && (
+              <a
+                href={data2.weburl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center py-2"
+              >
+                <button className="px-2 text-lg bg-sky-600 rounded-md p-2 w-8/12">
+                  Visit
+                </button>
+              </a>
+            )}
           </div>
         )}
 

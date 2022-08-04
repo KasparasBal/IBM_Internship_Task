@@ -8,33 +8,47 @@ import DatePicker from "./sm-components/DatePicker";
 import SearchIcon from "./svgs/SearchIcon";
 import LogoIcon from "./svgs/LogoIcon";
 //Context
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import dateFromContext from "../../context/dateFromContext";
 import dateToContext from "../../context/dateToContext";
 import FromContext from "../../context/FromContext";
 import ToContext from "../../context/ToContext";
+import inputErrorContext from "../../context/InputErrorContext";
 
 const Navbar = () => {
-  const { dateFrom, setDateFrom } = useContext(dateFromContext);
-  const { dateTo, setDateTo } = useContext(dateToContext);
-  const { from, setFrom } = useContext(FromContext);
-  const { to, setTo } = useContext(ToContext);
+  const { dateFrom } = useContext(dateFromContext);
+  const { dateTo } = useContext(dateToContext);
+  const { setFrom } = useContext(FromContext);
+  const { setTo } = useContext(ToContext);
+  const { inputError, setInputError } = useContext(inputErrorContext);
+  const [missingInput, setMissingInput] = useState("");
+  const [errorClass, setErrorClass] = useState("hidden");
 
   let navigate = useNavigate();
 
   const SearchHandler = () => {
-    setFrom(dateFrom);
-    setTo(dateTo);
-    navigate("/profile");
+    if (dateFrom.length === 0 || dateTo.length === 0 || inputError === "1") {
+      setMissingInput("All inputs are Required!");
+      setErrorClass(
+        "text-red-500 bg-white border border-red-500 p-1 rounded-md absolute top-1 right-2"
+      );
+    } else {
+      setFrom(dateFrom);
+      setTo(dateTo);
+      navigate("/profile");
+      setMissingInput("");
+      setErrorClass("hidden");
+    }
   };
 
   return (
-    <div className="bg-gray-900 flex items-center justify-between p-10 sticky top-0 shadow-blue-500/50 shadow-lg ">
+    <div className="bg-gray-900 flex items-center justify-between z-20 p-10 sticky top-0 shadow-blue-500/50 shadow-lg ">
       <Link to="/" className="text-slate-300 w-12 h-12 cursor-pointer ">
         <LogoIcon />
       </Link>
       <SearchBar />
       <DatePicker />
+      <div className={errorClass}>{missingInput}</div>
       <div
         onClick={SearchHandler}
         className="text-gray-900  p-2 cursor-pointer  bg-gray-100 rounded-lg "
