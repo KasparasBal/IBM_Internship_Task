@@ -18,9 +18,9 @@ const Profile = () => {
     `https://finnhub.io/api/v1/stock/candle?symbol=${searchInput}&resolution=D&from=${dateFrom}&to=${dateTo}&token=cbkcu8aad3if45781mfg`
   );
 
+  console.log(data);
   return (
     <div className="flex items-center justify-center my-5 mx-auto w-10/12 h-screen">
-      {data && { data }}
       {loading && (
         <div>
           <h1>Loading...</h1>

@@ -9,6 +9,9 @@ const DatePicker = () => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
+  //Todays Date
+  var today = new Date().toLocaleDateString();
+
   console.log(dateFrom);
   console.log(dateTo);
 
@@ -31,6 +34,7 @@ const DatePicker = () => {
         <input
           type="date"
           value={to}
+          max={today}
           onChange={(e) => {
             setTo(e.target.value);
             setDateTo(e.target.valueAsNumber.toString().slice(0, 10));
