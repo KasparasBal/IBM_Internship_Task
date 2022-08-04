@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import { useState } from "react";
@@ -22,7 +21,6 @@ function App() {
           <dateToContext.Provider value={{ dateTo, setDateTo }}>
             <FromContext.Provider value={{ From, setFrom }}>
               <ToContext.Provider value={{ To, setTo }}>
-                <Navbar />
                 <Routes>
                   <Route path="/" element={<Homepage />} />
                   <Route path="/profile" element={<Profile />} />

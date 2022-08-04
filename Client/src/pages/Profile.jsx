@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Navbar2 from "../components/Navbar/Navbar2";
 
 import useFetch from "../hooks/useFetch";
 
@@ -15,6 +16,10 @@ const Profile = () => {
   const { searchInput } = useContext(searchInputContext);
   const { From } = useContext(FromContext);
   const { To } = useContext(ToContext);
+
+  console.log(To);
+  console.log(From);
+  console.log(searchInput);
 
   // Fetching the Chart Data
 
@@ -74,41 +79,44 @@ const Profile = () => {
   // /////////////////////////////////////////////////////////////////////CHART
 
   return (
-    <div className="w-full h-full flex justify-center items-center m-10 gap-5">
-      {data2 && (
-        <div className=" bg-gray-900 p-5 w-2/12 text-slate-200  ">
-          <h1 className="text-2xl py-2">Company Details:</h1>
-          <div className="flex items-center justify-start">
-            <h2 className="px-2 text-lg">Name:</h2>
-            <h2>{data2.name}</h2>
+    <div>
+      <Navbar2 />
+      <div className="w-full h-full flex justify-center items-center m-10 gap-5">
+        {data2 && (
+          <div className=" bg-gray-900 p-5 w-2/12 text-slate-200  ">
+            <h1 className="text-2xl py-2">Company Details:</h1>
+            <div className="flex items-center justify-start">
+              <h2 className="px-2 text-lg">Name:</h2>
+              <h2>{data2.name}</h2>
+            </div>
+            <div className="flex items-center justify-start py-2">
+              <h2 className="px-2 text-lg">Currency:</h2>
+              <h2>{data2.currency}</h2>
+            </div>
+            <div className="flex items-center justify-start py-2">
+              <h2 className="px-2 text-lg">Country:</h2>
+              <h2>{data2.country}</h2>
+            </div>
+            <a
+              href={data2.weburl}
+              target="_blank"
+              className="flex items-center justify-center py-2"
+            >
+              <button className="px-2 text-lg bg-sky-600 rounded-md p-2 w-8/12">
+                Visit
+              </button>
+            </a>
           </div>
-          <div className="flex items-center justify-start py-2">
-            <h2 className="px-2 text-lg">Currency:</h2>
-            <h2>{data2.currency}</h2>
-          </div>
-          <div className="flex items-center justify-start py-2">
-            <h2 className="px-2 text-lg">Country:</h2>
-            <h2>{data2.country}</h2>
-          </div>
-          <a
-            href={data2.weburl}
-            target="_blank"
-            className="flex items-center justify-center py-2"
-          >
-            <button className="px-2 text-lg bg-sky-600 rounded-md p-2 w-8/12">
-              Visit
-            </button>
-          </a>
-        </div>
-      )}
-
-      <div>
-        {data && (
-          <div
-            className=" w-12/12 h-10/12 flex items-center justify-center  grow shrink bg-gray-900 p-5"
-            ref={divRef}
-          ></div>
         )}
+
+        <div>
+          {data && (
+            <div
+              className=" w-12/12 h-10/12 flex items-center justify-center  grow shrink bg-gray-900 p-5"
+              ref={divRef}
+            ></div>
+          )}
+        </div>
       </div>
     </div>
   );
