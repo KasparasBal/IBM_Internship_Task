@@ -27,6 +27,21 @@ const Profile = () => {
     `https://finnhub.io/api/v1/stock/profile2?symbol=${searchInput}&token=cbkcu8aad3if45781mfg`
   );
 
+  //Posting to Backend
+  const userData = {
+    company: data2,
+    stocks: data,
+  };
+
+  fetch("http://localhost:3050", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  /////////
+  //Looping through stock data
   let array = [];
   if (data !== null) {
     for (let i = 0; i < Object.values(data)[0].length; i++) {
@@ -41,10 +56,10 @@ const Profile = () => {
     }
   }
 
-  // //////////////////////////////////////////////////////////////////Test
+  // referencing div for lightweight-charts
   const divRef = useRef();
 
-  // ///////////////////////////////////////////////////////////////// CHART
+  // CHART
 
   setTimeout(() => {
     if (data !== null) {
