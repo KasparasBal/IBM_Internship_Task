@@ -48,16 +48,15 @@ const SearchBar = () => {
   }, [search]);
 
   const handleSelect = () => {
-    setSearch(data.ticker);
     setSearchInput(data.ticker);
     setHidden("hidden");
     setCompanyName(
-      "bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0"
+      "bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0 "
     );
   };
 
   return (
-    <div className="flex justify-center items-center w-5/12 relative ">
+    <div className="flex justify-center items-center w-5/12 relative  ">
       <input
         type="text"
         placeholder="Search By Company Symbol"
@@ -74,7 +73,7 @@ const SearchBar = () => {
       {data && search.length !== 0 && Object.keys(data).length !== 0 && (
         <div onClick={handleSelect} className={hidden}>
           <div className="flex items-center justify-between">
-            <div className="bg-blue-500 text-slate-200 text-xl p-2 rounded-lg justify-center items-center  ">
+            <div className="bg-blue-500 text-slate-200 text-xl p-2 rounded-lg justify-center items-center ">
               {data.name}
             </div>
             <div className="text-lg p-2 ">{data.country}</div>
