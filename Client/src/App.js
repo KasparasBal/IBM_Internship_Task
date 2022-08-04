@@ -5,7 +5,6 @@ import { useState } from "react";
 import searchInputContext from "./context/searchInputContext";
 import dateFromContext from "./context/dateFromContext";
 import dateToContext from "./context/dateToContext";
-import inputErrorContext from "./context/InputErrorContext";
 import FromContext from "./context/FromContext";
 import ToContext from "./context/ToContext";
 
@@ -13,7 +12,6 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
-  const [inputError, setInputError] = useState("");
   const [From, setFrom] = useState("");
   const [To, setTo] = useState("");
   return (
@@ -23,14 +21,10 @@ function App() {
           <dateToContext.Provider value={{ dateTo, setDateTo }}>
             <FromContext.Provider value={{ From, setFrom }}>
               <ToContext.Provider value={{ To, setTo }}>
-                <inputErrorContext.Provider
-                  value={{ inputError, setInputError }}
-                >
-                  <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/profile" element={<Profile />} />
-                  </Routes>
-                </inputErrorContext.Provider>
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/profile" element={<Profile />} />
+                </Routes>
               </ToContext.Provider>
             </FromContext.Provider>
           </dateToContext.Provider>

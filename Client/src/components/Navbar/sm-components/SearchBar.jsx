@@ -2,11 +2,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import searchInputContext from "../../../context/searchInputContext";
-import inputErrorContext from "../../../context/InputErrorContext";
 
 const SearchBar = () => {
   const { setSearchInput } = useContext(searchInputContext);
-  const { setInputError } = useContext(inputErrorContext);
   const [search, setSearch] = useState("");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
@@ -59,12 +57,6 @@ const SearchBar = () => {
       "bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0 "
     );
   };
-
-  if (search.length === 0) {
-    setInputError("1");
-  } else {
-    setInputError("");
-  }
 
   return (
     <div className="flex justify-center items-center w-5/12 relative  ">

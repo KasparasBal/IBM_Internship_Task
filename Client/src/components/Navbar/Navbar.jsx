@@ -13,21 +13,27 @@ import dateFromContext from "../../context/dateFromContext";
 import dateToContext from "../../context/dateToContext";
 import FromContext from "../../context/FromContext";
 import ToContext from "../../context/ToContext";
-import inputErrorContext from "../../context/InputErrorContext";
+
+import searchInputContext from "../..//context/searchInputContext";
 
 const Navbar = () => {
   const { dateFrom } = useContext(dateFromContext);
   const { dateTo } = useContext(dateToContext);
   const { setFrom } = useContext(FromContext);
   const { setTo } = useContext(ToContext);
-  const { inputError, setInputError } = useContext(inputErrorContext);
+  // const { inputError } = useContext(inputErrorContext);
   const [missingInput, setMissingInput] = useState("");
   const [errorClass, setErrorClass] = useState("hidden");
+  const { searchInput } = useContext(searchInputContext);
 
   let navigate = useNavigate();
 
   const SearchHandler = () => {
-    if (dateFrom.length === 0 || dateTo.length === 0 || inputError === "1") {
+    if (
+      dateFrom.length === 0 ||
+      dateTo.length === 0 ||
+      searchInput.length === 0
+    ) {
       setMissingInput("All inputs are Required!");
       setErrorClass(
         "text-red-500 bg-white border border-red-500 p-1 rounded-md absolute top-1 right-2"
