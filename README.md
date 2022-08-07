@@ -60,3 +60,8 @@ Tools Used:
 
   `npm start`
   
+:three: `Ports used`
+
+FrontEnd: 3000
+BackEnd: 3050
+  
