@@ -56,8 +56,8 @@ const Profile = () => {
   setTimeout(() => {
     if (data !== null && executed !== true) {
       const chartOptions = {
-        width: 1000,
-        height: 600,
+        width: 0,
+        height: 0,
         layout: {
           textColor: "black",
           background: { type: "solid", color: "white" },
@@ -107,10 +107,10 @@ const Profile = () => {
   return (
     <div>
       <Navbar2 />
-      <div className="w-full h-full flex justify-center items-center m-10 gap-5">
+      <div className="w-full h-full flex justify-center flex-col items-center bg-gray-900  gap-5">
         {error2 && <div>{error2}</div>}
         {data2 && (
-          <div className=" bg-gray-900 p-5 w-2/12 text-slate-200  ">
+          <div className=" bg-gray-900 p-5 w-12/12 text-slate-200  ">
             <h1 className="text-2xl py-2">Company Details:</h1>
             <div className="flex items-center justify-start">
               <h2 className="px-2 text-lg">Name:</h2>
@@ -145,7 +145,7 @@ const Profile = () => {
             <div
               id="candlestick_graph"
               className={
-                "w-12/12 h-10/12 flex items-center justify-center  grow shrink bg-gray-900 p-5"
+                "w-screen h-screen flex items-center justify-center  grow shrink bg-gray-900"
               }
               ref={divRef}
             ></div>

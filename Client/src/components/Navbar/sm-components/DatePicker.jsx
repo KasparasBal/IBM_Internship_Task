@@ -13,8 +13,8 @@ const DatePicker = () => {
   var today = new Date().toLocaleDateString();
 
   return (
-    <div className="flex justify-center items-center gap-3  ">
-      <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center gap-3 flex-col ">
+      <div className="flex justify-center items-center flex-col gap-2">
         <h4 className="text-slate-300  px-2">From:</h4>
         <input
           type="date"
@@ -23,10 +23,10 @@ const DatePicker = () => {
             setFrom(e.target.value);
             setDateFrom(e.target.valueAsNumber.toString().slice(0, 10));
           }}
-          className="bg-gray-100 p-2 outline-none rounded-md  cursor-text "
+          className="bg-gray-100 p-2 outline-none rounded-md  cursor-text  "
         />
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center flex-col gap-2">
         <h4 className="text-slate-300 px-2">To:</h4>
         <input
           type="date"
@@ -36,7 +36,7 @@ const DatePicker = () => {
             setTo(e.target.value);
             setDateTo(e.target.valueAsNumber.toString().slice(0, 10));
           }}
-          className="bg-gray-100 p-2 outline-none rounded-md cursor-text "
+          className="bg-gray-100 p-2 outline-none rounded-md  cursor-text "
         />
       </div>
     </div>

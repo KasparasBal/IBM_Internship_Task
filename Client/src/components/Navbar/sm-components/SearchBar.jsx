@@ -9,7 +9,7 @@ const SearchBar = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [hidden, setHidden] = useState(
-    "text-gray-900 absolute top-12 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer  "
+    "text-gray-900 absolute top-12 w-screen h-auto  rounded-lg bg-gray-100 cursor-pointer border-4 border-sky-500   "
   );
   const [companyName, setCompanyName] = useState("hidden");
 
@@ -54,7 +54,7 @@ const SearchBar = () => {
     setSearchInput(data.ticker);
     setHidden("hidden");
     setCompanyName(
-      "bg-gray-100 p-2 outline-none rounded-r-lg border-l-2 border-sky-400 absolute right-0 "
+      "bg-gray-100 absolute top-14 p-2 border-4 border-sky-500 text-sm rounded-md  "
     );
   };
 
@@ -62,31 +62,31 @@ const SearchBar = () => {
     <div className="flex justify-center items-center w-5/12 relative  ">
       <input
         type="text"
-        placeholder="Search By Company Symbol"
-        className="bg-gray-100 p-2 w-full outline-none rounded-lg "
+        placeholder="Company Symbol"
+        className="bg-gray-100 text-sm p-2 w-full outline-none rounded-lg "
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
           setHidden(
-            "text-gray-900 absolute top-12 w-full h-auto p-2 rounded-lg bg-gray-100 cursor-pointer "
+            "text-gray-900 absolute top-12 w-screen h-auto  rounded-lg bg-gray-100 cursor-pointer border-4 border-sky-500 "
           );
           setCompanyName("hidden");
         }}
       />
       {data && search.length !== 0 && Object.keys(data).length !== 0 && (
         <div onClick={handleSelect} className={hidden}>
-          <div className="flex items-center justify-between">
-            <div className="bg-blue-500 text-slate-200 text-xl p-2 rounded-lg justify-center items-center ">
+          <div className="flex items-center justify-between flex-col p-2 ">
+            <div className="bg-blue-500 text-slate-200 text-sm p-2 rounded-lg justify-center items-center ">
               {data.name}
             </div>
             <div className="text-lg p-2 ">{data.country}</div>
             <div className="text-lg p-2">{data.currency}</div>
-            <div className="text-lg p-2">{data.weburl}</div>
+            <div className="text-sm p-2 ">{data.weburl}</div>
           </div>
         </div>
       )}
       {error && search.length !== 0 && (
-        <div className=" bg-slate-100 border border-red-700 text-red-700 absolute -top-9 left-0 p-1 w-5/5 rounded-md text-d">
+        <div className=" bg-slate-100 border border-red-700 text-red-700 absolute -top-16 left-0 p-1 w-5/5 rounded-md text-d">
           {error}
         </div>
       )}

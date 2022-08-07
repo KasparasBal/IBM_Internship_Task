@@ -48,7 +48,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-900 flex items-center justify-between z-20 p-10 sticky top-0 shadow-blue-500/50 shadow-lg ">
+    <div className="bg-gray-900 flex items-center justify-center z-20  sticky top-0 gap-20 shadow-blue-500/50 shadow-lg py-5 flex-col h-screen w-auto ">
       <Link to="/" className="text-slate-300 w-12 h-12 cursor-pointer ">
         <LogoIcon />
       </Link>
