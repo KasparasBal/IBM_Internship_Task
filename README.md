@@ -66,4 +66,13 @@ Tools Used:
 FrontEnd: 3000
 
 BackEnd: 3050
+
+:four: `Application url`
+
+[(http://localhost:3000/)](http://localhost:3000/)
   
+:five: `Endpoints`
+
+http://localhost:3050
+
+method:POST
