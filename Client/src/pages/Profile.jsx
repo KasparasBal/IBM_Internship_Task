@@ -1,14 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+//components
 import Navbar2 from "../components/Navbar/Navbar2";
-
+//hooks
 import useFetch from "../hooks/useFetch";
-
 //Context
 import { useContext } from "react";
 import searchInputContext from "../context/searchInputContext";
 import FromContext from "../context/FromContext";
 import ToContext from "../context/ToContext";
-
+import executedContext from "../context/executedContext";
 // lightweight charts
 import { createChart } from "lightweight-charts";
 
@@ -16,34 +16,22 @@ const Profile = () => {
   const { searchInput } = useContext(searchInputContext);
   const { From } = useContext(FromContext);
   const { To } = useContext(ToContext);
+  const { executed, setExecuted } = useContext(executedContext);
 
   // Fetching the Chart Data
 
-  const { data } = useFetch(
+  const { data, error } = useFetch(
     `https://finnhub.io/api/v1/stock/candle?symbol=${searchInput}&resolution=D&from=${From}&to=${To}&token=cbkcu8aad3if45781mfg`
   );
 
-  const { data: data2 } = useFetch(
+  const { data: data2, error: error2 } = useFetch(
     `https://finnhub.io/api/v1/stock/profile2?symbol=${searchInput}&token=cbkcu8aad3if45781mfg`
   );
 
-  //Posting to Backend
-  const userData = {
-    company: data2,
-    stocks: data,
-  };
-
-  fetch("http://localhost:3050", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
   /////////
   //Looping through stock data
   let array = [];
-  if (data !== null) {
+  if (data !== null && executed !== true) {
     for (let i = 0; i < Object.values(data)[0].length; i++) {
       array.push({
         open: data.o[i],
@@ -54,15 +42,16 @@ const Profile = () => {
         value: data.v[i],
       });
     }
+    setExecuted(true);
   }
 
   // referencing div for lightweight-charts
   const divRef = useRef();
 
   // CHART
-
+  //Timeout set to let the fetch get data before rendering the data
   setTimeout(() => {
-    if (data !== null) {
+    if (data !== null && executed !== true) {
       const chartOptions = {
         width: 1000,
         height: 600,
@@ -85,12 +74,37 @@ const Profile = () => {
       chart.timeScale().fitContent();
     }
   }, 1000);
-  // /////////////////////////////////////////////////////////////////////CHART
+  //
+
+  //Posting to Backend
+  const userData = {
+    company: data2,
+    stocks: data,
+  };
+
+  if (executed !== true) {
+    fetch("http://localhost:3050", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw error;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <div>
       <Navbar2 />
       <div className="w-full h-full flex justify-center items-center m-10 gap-5">
+        {error2 && <div>{error2}</div>}
         {data2 && (
           <div className=" bg-gray-900 p-5 w-2/12 text-slate-200  ">
             <h1 className="text-2xl py-2">Company Details:</h1>
@@ -122,9 +136,13 @@ const Profile = () => {
         )}
 
         <div>
+          {error && <div>{error}</div>}
           {data && (
             <div
-              className=" w-12/12 h-10/12 flex items-center justify-center  grow shrink bg-gray-900 p-5"
+              id="candlestick_graph"
+              className={
+                "w-12/12 h-10/12 flex items-center justify-center  grow shrink bg-gray-900 p-5"
+              }
               ref={divRef}
             ></div>
           )}
