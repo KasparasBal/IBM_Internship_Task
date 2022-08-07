@@ -12,12 +12,25 @@ Tools Used:
 
 3. Node.js
 
-:one:  ` How to Run this project`
+
+:one: `Dependencies used`
+
+1. React Router Dom
+2. Lightweight Charts
+3. Express
+4. Body Parser
+5. Cors
+
+--Dev Dependency
+
+6. Nodemon
+
+:two:  ` How to Run this project`
 
 
 
 
-1. Clone / Download this repozitory.
+1. Clone / Download this repository.
 
 2. change directory to 'Server"
 
