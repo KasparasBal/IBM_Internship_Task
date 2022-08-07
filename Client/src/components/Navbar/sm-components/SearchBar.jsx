@@ -65,6 +65,7 @@ const SearchBar = () => {
         placeholder="Company Symbol"
         className="bg-gray-100 text-sm p-2 w-full outline-none rounded-lg "
         value={search}
+        maxlength="35"
         onChange={(e) => {
           setSearch(e.target.value);
           setHidden(
