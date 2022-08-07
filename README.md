@@ -15,7 +15,7 @@ Tools Used:
 :one:  ` How to Run this project`
 
 
-`BackEnd`
+
 
 1. Clone / Download this repozitory.
 
@@ -31,7 +31,7 @@ Tools Used:
 
   `npm run dev`
   
- `FrontEnd` 
+
   
 5.Open another terminal
 
