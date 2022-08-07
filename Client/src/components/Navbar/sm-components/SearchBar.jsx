@@ -9,7 +9,7 @@ const SearchBar = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [hidden, setHidden] = useState(
-    "text-gray-900 absolute top-12 w-screen h-auto  rounded-lg bg-gray-100 cursor-pointer border-4 border-sky-500   "
+    "text-gray-900 absolute top-12 w-screen sm:w-full h-auto  rounded-lg bg-gray-100 cursor-pointer border-4 border-sky-500   "
   );
   const [companyName, setCompanyName] = useState("hidden");
 
@@ -54,7 +54,7 @@ const SearchBar = () => {
     setSearchInput(data.ticker);
     setHidden("hidden");
     setCompanyName(
-      "bg-gray-100 absolute top-14 p-2 border-4 border-sky-500 text-sm rounded-md  "
+      "bg-gray-100 absolute top-14 lg:-top-0  lg:right-0 p-2 border-4 lg:border-l-4 lg:border-r-0 lg:border-t-0 lg:border-b-0 lg:rounded-none lg:rounded-r-md border-sky-500 text-sm rounded-md  "
     );
   };
 
@@ -68,14 +68,14 @@ const SearchBar = () => {
         onChange={(e) => {
           setSearch(e.target.value);
           setHidden(
-            "text-gray-900 absolute top-12 w-screen h-auto  rounded-lg bg-gray-100 cursor-pointer border-4 border-sky-500 "
+            "text-gray-900 absolute top-12 w-screen sm:w-full h-auto  rounded-lg bg-gray-100 cursor-pointer border-4 border-sky-500 "
           );
           setCompanyName("hidden");
         }}
       />
       {data && search.length !== 0 && Object.keys(data).length !== 0 && (
         <div onClick={handleSelect} className={hidden}>
-          <div className="flex items-center justify-between flex-col p-2 ">
+          <div className="flex items-center justify-between flex-col lg:flex-row p-2 ">
             <div className="bg-blue-500 text-slate-200 text-sm p-2 rounded-lg justify-center items-center ">
               {data.name}
             </div>
@@ -86,7 +86,7 @@ const SearchBar = () => {
         </div>
       )}
       {error && search.length !== 0 && (
-        <div className=" bg-slate-100 border border-red-700 text-red-700 absolute -top-16 left-0 p-1 w-5/5 rounded-md text-d">
+        <div className=" bg-slate-100 border border-red-700 text-red-700 absolute -top-10 left-0 p-1 w-44 rounded-md text-sm">
           {error}
         </div>
       )}

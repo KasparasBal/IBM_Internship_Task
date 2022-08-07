@@ -57,9 +57,12 @@ const Navbar = () => {
       <div className={errorClass}>{missingInput}</div>
       <div
         onClick={SearchHandler}
-        className="text-gray-900  p-2 cursor-pointer  bg-gray-100 rounded-lg "
+        className="text-gray-900  p-2 cursor-pointer   rounded-lg flex  bg-blue-500"
       >
-        <SearchIcon />
+        <h3 className="px-2 font-medium text-slate-100">Look Up</h3>
+        <span className="text-slate-200">
+          <SearchIcon />
+        </span>
       </div>
     </div>
   );

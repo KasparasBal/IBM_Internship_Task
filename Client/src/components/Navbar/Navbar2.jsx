@@ -26,7 +26,7 @@ const Navbar = () => {
     setPosted(false);
   };
   return (
-    <div className="bg-gray-900 flex items-center justify-between p-10 sticky top-0 shadow-blue-500/50 shadow-lg ">
+    <div className="bg-gray-900 flex items-center justify-between p-10  top-0 border-b-4 border-blue-500 ">
       <Link
         to="/"
         onClick={prevPageHandler}

@@ -56,13 +56,14 @@ const Profile = () => {
   setTimeout(() => {
     if (data !== null && executed !== true) {
       const chartOptions = {
-        width: 0,
-        height: 0,
+        width: divRef.current.clientWidth,
+        height: divRef.current.clientHeight,
         layout: {
           textColor: "black",
           background: { type: "solid", color: "white" },
         },
       };
+
       const chart = createChart(divRef.current, chartOptions);
       const candlestickSeries = chart.addCandlestickSeries({
         upColor: "#26a69a",
@@ -78,7 +79,6 @@ const Profile = () => {
     }
   }, 1000);
   //
-
   //Posting to Backend
 
   if (data2 !== null && data !== null && posted !== true) {
@@ -139,13 +139,13 @@ const Profile = () => {
           </div>
         )}
 
-        <div>
+        <div className="w-screen h-5/6 flex items-center p-10">
           {error && <div>{error}</div>}
           {data && (
             <div
               id="candlestick_graph"
               className={
-                "w-screen h-screen flex items-center justify-center  grow shrink bg-gray-900"
+                "w-1/2 h-screen flex items-center justify-center  grow shrink bg-gray-900"
               }
               ref={divRef}
             ></div>

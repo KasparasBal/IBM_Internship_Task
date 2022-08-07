@@ -13,7 +13,7 @@ const DatePicker = () => {
   var today = new Date().toLocaleDateString();
 
   return (
-    <div className="flex justify-center items-center gap-3 flex-col ">
+    <div className="flex justify-center items-center gap-3 flex-col m-5 ">
       <div className="flex justify-center items-center flex-col gap-2">
         <h4 className="text-slate-300  px-2">From:</h4>
         <input
