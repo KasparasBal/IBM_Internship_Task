@@ -8,6 +8,7 @@ import dateToContext from "./context/dateToContext";
 import FromContext from "./context/FromContext";
 import ToContext from "./context/ToContext";
 import executedContext from "./context/executedContext";
+import postedContext from "./context/postedContext";
 
 const App = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -16,6 +17,7 @@ const App = () => {
   const [From, setFrom] = useState("");
   const [To, setTo] = useState("");
   const [executed, setExecuted] = useState("");
+  const [posted, setPosted] = useState("");
   return (
     <div>
       <searchInputContext.Provider value={{ searchInput, setSearchInput }}>
@@ -24,10 +26,12 @@ const App = () => {
             <FromContext.Provider value={{ From, setFrom }}>
               <ToContext.Provider value={{ To, setTo }}>
                 <executedContext.Provider value={{ executed, setExecuted }}>
-                  <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/profile" element={<Profile />} />
-                  </Routes>
+                  <postedContext.Provider value={{ posted, setPosted }}>
+                    <Routes>
+                      <Route path="/" element={<Homepage />} />
+                      <Route path="/profile" element={<Profile />} />
+                    </Routes>
+                  </postedContext.Provider>
                 </executedContext.Provider>
               </ToContext.Provider>
             </FromContext.Provider>

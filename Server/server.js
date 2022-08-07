@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 //Post of user Data (from front end)
 app.post("/", (req, res) => {
-  console.log(req.body.company.name);
+  console.log(req.body.company);
   console.log(req.body.stocks);
 });
 

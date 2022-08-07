@@ -1,14 +1,16 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 //components
 import Navbar2 from "../components/Navbar/Navbar2";
 //hooks
 import useFetch from "../hooks/useFetch";
+
 //Context
 import { useContext } from "react";
 import searchInputContext from "../context/searchInputContext";
 import FromContext from "../context/FromContext";
 import ToContext from "../context/ToContext";
 import executedContext from "../context/executedContext";
+import postedContext from "../context/postedContext";
 // lightweight charts
 import { createChart } from "lightweight-charts";
 
@@ -17,6 +19,7 @@ const Profile = () => {
   const { From } = useContext(FromContext);
   const { To } = useContext(ToContext);
   const { executed, setExecuted } = useContext(executedContext);
+  const { posted, setPosted } = useContext(postedContext);
 
   // Fetching the Chart Data
 
@@ -77,12 +80,12 @@ const Profile = () => {
   //
 
   //Posting to Backend
-  const userData = {
-    company: data2,
-    stocks: data,
-  };
 
-  if (executed !== true) {
+  if (data2 !== null && data !== null && posted !== true) {
+    const userData = {
+      company: data2.name,
+      stocks: data,
+    };
     fetch("http://localhost:3050", {
       method: "POST",
       headers: {
@@ -95,6 +98,7 @@ const Profile = () => {
           throw error;
         }
       })
+      .then(setPosted(true))
       .catch((err) => {
         console.log(err);
       });

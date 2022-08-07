@@ -9,18 +9,21 @@ import searchInputContext from "../../context/searchInputContext";
 import dateFromContext from "../../context/dateFromContext";
 import dateToContext from "../../context/dateToContext";
 import executedContext from "../../context/executedContext";
+import postedContext from "../../context/postedContext";
 
 const Navbar = () => {
   const { setDateFrom } = useContext(dateFromContext);
   const { setDateTo } = useContext(dateToContext);
   const { setSearchInput } = useContext(searchInputContext);
-  const { executed, setExecuted } = useContext(executedContext);
+  const { setExecuted } = useContext(executedContext);
+  const { setPosted } = useContext(postedContext);
 
   const prevPageHandler = () => {
     setDateFrom("");
     setDateTo("");
     setSearchInput("");
     setExecuted(false);
+    setPosted(false);
   };
   return (
     <div className="bg-gray-900 flex items-center justify-between p-10 sticky top-0 shadow-blue-500/50 shadow-lg ">
