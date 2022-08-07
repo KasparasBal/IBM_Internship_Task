@@ -76,3 +76,8 @@ http://localhost:3000/
 http://localhost:3050
 
 method:POST
+
+:six: `HOW TO USE THE APP`
+
+You will find a PDF format file in the root folder.
+Inside the PDF file you can find a minimal guide on how to use the app.
