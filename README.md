@@ -18,20 +18,32 @@ Tools Used:
 `BackEnd`
 
 1. Clone / Download this repozitory.
+
 2. change directory to 'Server"
-  cd Server
+
+  `cd Server`
+  
 3. Install dependencies
-  npm install
+
+  `npm install`
+  
 4. start Server
-  npm run dev
+
+  `npm run dev`
   
  `FrontEnd` 
   
 5.Open another terminal
+
 6.Change directory to Client
-  cd Client
+
+  `cd Client`
+  
 7.Install dependencies
-  npm install
+
+  `npm install`
+  
 8.Run Client side
-  npm start
+
+  `npm start`
   
